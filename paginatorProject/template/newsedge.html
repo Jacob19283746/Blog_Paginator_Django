@@ -22,9 +22,9 @@
     <form method="GET" id="per_page_form">
         <label for="per_page">Количество новостей на странице:</label>
         <select name="per_page" id="per_page" onchange="document.getElementById('per_page_form').submit();">
-            <option value="3" {% if per_page == '3' %}selected{% endif %}>3</option>
-            <option value="5" {% if per_page == '5' %}selected{% endif %}>5</option>
-            <option value="10" {% if per_page == '10' %}selected{% endif %}>10</option>
+            <option value="3" {% if per_page == 3 %}selected{% endif %}>3</option>
+            <option value="5" {% if per_page == 5 %}selected{% endif %}>5</option>
+            <option value="10" {% if per_page == 10 %}selected{% endif %}>10</option>
         </select>
     </form>
 
