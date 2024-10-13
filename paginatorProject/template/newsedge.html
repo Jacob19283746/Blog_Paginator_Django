@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Новости</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'paginatorProject/styles.css' %}">
+</head>
+<body>
+    <h1>Новости</h1>
+
+    {% for news in page_object %}
+        <div>
+            <h2>{{ news.title }}</h2>
+            <p>{{ news.content }}</p>
+            <small>{{ news.date_time }}</small>
+        </div>
+        <hr>
+    {% endfor %}
+
+    <form method="GET" id="per_page_form">
+        <label for="per_page">Количество новостей на странице:</label>
+        <select name="per_page" id="per_page" onchange="document.getElementById('per_page_form').submit();">
+            <option value="3" {% if per_page == '3' %}selected{% endif %}>3</option>
+            <option value="5" {% if per_page == '5' %}selected{% endif %}>5</option>
+            <option value="10" {% if per_page == '10' %}selected{% endif %}>10</option>
+        </select>
+    </form>
+
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_object.has_previous %}
+                <a href="?page=1&per_page={{ per_page }}">Первая</a>
+                <a href="?page={{ page_object.previous_page_number }}&per_page={{ per_page }}">Предыдущая</a>
+            {% endif %}
+
+            <span>Страница {{ page_object.number }} из {{ page_object.paginator.num_pages }}</span>
+
+            {% if page_object.has_next %}
+                <a href="?page={{ page_object.next_page_number }}&per_page={{ per_page }}">Следующая</a>
+                <a href="?page={{ page_object.paginator.num_pages }}&per_page={{ per_page }}">Последняя</a>
+            {% endif %}
+        </span>
+    </div>
+
+</body>
+</html>
